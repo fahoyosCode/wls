@@ -8,7 +8,7 @@ def loadArchive(archiveName):
     groups.append(linea.rstrip())
 
 ## Create groups from array
-def createGroups()
+def createGroups():
   loadArchive('groups.txt')
   for group in groups:
     newGroupName = group
@@ -37,20 +37,19 @@ def addUsetToGroup(userName, groupName):
   try:
     cd('/SecurityConfiguration/'+domainName+'/Realms/myrealm/AuthenticationProviders/DefaultAuthenticator')
       # check if user exists
-      if (cmo.userExists(userName)==0):
-        print 'User '+userName+' does not exist CANNOT add '+userName+' to group '+groupName+' !'
-        return
-      # check if group exists
-      if (cmo.groupExists(groupName)==0):
-        print 'Group '+groupName+' does not exist CANNOT add '+userName+' to group '+groupName+' !'
-        return
-      # check if already member
-      if (cmo.isMember(groupName,userName,true)==1):
-        print 'User '+userName+' is already member of group '+groupName+' !'
-        return
-     
-      # finally  add user to group
-      cmo.addMemberToGroup(groupName, userName)
+    if (cmo.userExists(userName)==0):
+      print 'User '+userName+' does not exist CANNOT add '+userName+' to group '+groupName+' !'
+      return
+    # check if group exists
+    if (cmo.groupExists(groupName)==0):
+      print 'Group '+groupName+' does not exist CANNOT add '+userName+' to group '+groupName+' !'
+      return
+    # check if already member
+    if (cmo.isMember(groupName,userName,true)==1):
+      print 'User '+userName+' is already member of group '+groupName+' !'
+      return
+    # finally  add user to group
+    cmo.addMemberToGroup(groupName, userName)
   except:
     dumpStack()
 
